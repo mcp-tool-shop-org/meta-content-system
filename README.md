@@ -1,5 +1,8 @@
 # DevOpTyper.Content
 
+> Part of [MCP Tool Shop](https://mcptoolshop.com)
+
+
 Portable content ingestion, normalization, and indexing for code-typing practice apps.
 
 This library powers the content pipeline behind [Dev-Op-Typer](https://github.com/mcp-tool-shop-org/dev-op-typer) (Windows) and [linux-dev-typer](https://github.com/mcp-tool-shop-org/linux-dev-typer) (cross-platform). It takes source code files in, and produces a normalized, indexed library that both apps can consume identically regardless of platform.

@@ -1,7 +1,7 @@
 import type { SiteConfig } from '@mcptoolshop/site-theme';
 
 export const config: SiteConfig = {
-  title: 'DevOpTyper.Content',
+  title: 'Meta Content System',
   description: 'Portable content ingestion, normalization, and indexing for typing-practice apps. Zero external dependencies.',
   logoBadge: 'MC',
   brandName: 'Meta Content System',

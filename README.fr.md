@@ -4,7 +4,7 @@
 
 <p align="center"><img src="assets/logo.png" alt="Meta Content System" width="400"></p>
 
-<h1 align="center">DevOpTyper.Content</h1>
+<h1 align="center">Meta Content System</h1>
 
 <p align="center">
   <a href="https://github.com/mcp-tool-shop-org/meta-content-system/actions/workflows/build.yml"><img src="https://img.shields.io/github/actions/workflow/status/mcp-tool-shop-org/meta-content-system/build.yml?branch=main&style=flat-square&label=CI" alt="CI"></a>

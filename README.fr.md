@@ -14,33 +14,33 @@
   <a href="https://mcp-tool-shop-org.github.io/meta-content-system/"><img src="https://img.shields.io/badge/Landing_Page-live-blue?style=flat-square" alt="Landing Page"></a>
 </p>
 
-**Shared content system for typing-practice apps -- lessons, progression, and adaptive difficulty.**
+**Système de contenu partagé pour les applications d'entraînement à la frappe : leçons, progression et difficulté adaptative.**
 
-DevOpTyper.Content is the portable content pipeline behind [Dev-Op-Typer](https://github.com/mcp-tool-shop-org/dev-op-typer) (Windows) and [linux-dev-typer](https://github.com/mcp-tool-shop-org/linux-dev-typer) (cross-platform). It ingests source code files, normalizes them deterministically, computes difficulty metrics, and produces an indexed library that both apps consume identically regardless of platform.
+DevOpTyper.Content est le pipeline de contenu portable qui alimente [Dev-Op-Typer](https://github.com/mcp-tool-shop-org/dev-op-typer) (Windows) et [linux-dev-typer](https://github.com/mcp-tool-shop-org/linux-dev-typer) (multiplateforme). Il ingère les fichiers de code source, les normalise de manière déterministe, calcule des métriques de difficulté et génère une bibliothèque indexée que les deux applications consomment de manière identique, quel que soit le système d'exploitation.
 
-## Why DevOpTyper.Content?
+## Pourquoi DevOpTyper.Content ?
 
-- **One pipeline, every platform** -- The same input files produce the same `library.index.json` on Windows, Linux, and macOS. No platform drift.
-- **Zero external dependencies** -- Pure .NET 8 library built entirely on the BCL. Nothing to install, nothing to conflict.
-- **Interface-driven architecture** -- Every pipeline stage (`IContentSource`, `IExtractor`, `IMetricCalculator`, `IContentLibrary`) is behind an abstraction for testability and extensibility.
-- **Deterministic language detection** -- Rule-based identification from file extensions and content heuristics. Supports 20+ languages out of the box.
-- **SHA-256 content deduplication** -- Content-addressed IDs prevent duplicates across imports. Import the same file twice, get one entry.
-- **Difficulty-aware metrics** -- Symbol density, indent depth, line count, and character distribution power adaptive difficulty in consuming apps.
-- **Smart extraction** -- Large files are split into right-sized practice blocks; small files are kept whole. Configurable thresholds.
+- **Un seul pipeline, pour toutes les plateformes** : Les mêmes fichiers d'entrée produisent le même fichier `library.index.json` sur Windows, Linux et macOS. Pas de divergence entre les plateformes.
+- **Aucune dépendance externe** : Bibliothèque .NET 8 pure, construite entièrement sur la BCL. Rien à installer, aucun conflit possible.
+- **Architecture basée sur des interfaces** : Chaque étape du pipeline (`IContentSource`, `IExtractor`, `IMetricCalculator`, `IContentLibrary`) est abstraite pour faciliter les tests et l'extension.
+- **Détection de langage déterministe** : Identification basée sur des règles, en utilisant les extensions de fichiers et les heuristiques du contenu. Prend en charge plus de 20 langues par défaut.
+- **Déduplication de contenu basée sur le hachage SHA-256** : Les identifiants basés sur le contenu évitent les doublons lors de l'importation. Importez le même fichier deux fois, et vous n'obtiendrez qu'une seule entrée.
+- **Métriques sensibles à la difficulté** : La densité des symboles, la profondeur de l'indentation, le nombre de lignes et la distribution des caractères permettent d'adapter la difficulté dans les applications consommatrices.
+- **Extraction intelligente** : Les fichiers volumineux sont divisés en blocs d'entraînement de taille appropriée ; les petits fichiers sont conservés intacts. Les seuils sont configurables.
 
-## NuGet Package
+## Package NuGet
 
 | Package | Description |
-|---------|-------------|
-| [`DevOpTyper.Content`](https://www.nuget.org/packages/DevOpTyper.Content) | Content ingestion, normalization, language detection, metrics calculation, and index generation. Zero external dependencies. |
+| --------- | ------------- |
+| [`DevOpTyper.Content`](https://www.nuget.org/packages/DevOpTyper.Content) | Ingestion, normalisation et détection de contenu, calcul de métriques et génération d'index. Aucune dépendance externe. |
 
 ```bash
 dotnet add package DevOpTyper.Content
 ```
 
-## Quick Start
+## Démarrage rapide
 
-### As a library
+### En tant que bibliothèque
 
 ```csharp
 using DevOpTyper.Content.Abstractions;
@@ -70,7 +70,7 @@ var store = new JsonLibraryIndexStore();
 store.Save("library.index.json", index);
 ```
 
-### Using the CLI
+### Utilisation de l'interface en ligne de commande (CLI)
 
 ```bash
 dotnet run --project src/DevOpTyper.Content.Cli -- build --source ./my-code --out library.index.json
@@ -109,30 +109,30 @@ IContentLibrary                   Query by language, source, line count,
                                   symbol density range
 ```
 
-### Supported Languages
+### Langues prises en charge
 
-The language detector covers 20+ languages via extension mapping and content heuristics:
+Le détecteur de langue prend en charge plus de 20 langues grâce à la correspondance des extensions et aux heuristiques du contenu :
 
-Python, C#, Java, JavaScript, TypeScript, SQL, Bash, Rust, Go, Kotlin, C, C++, JSON, YAML, Markdown -- and more via extension map. Unknown files fall back to `text`.
+Python, C#, Java, JavaScript, TypeScript, SQL, Bash, Rust, Go, Kotlin, C, C++, JSON, YAML, Markdown – et plus encore grâce à la carte des extensions. Les fichiers inconnus sont traités comme du texte (`text`).
 
-### Metrics Computed
+### Métriques calculées
 
 | Metric | Type | Description |
-|--------|------|-------------|
-| `Lines` | `int` | Total line count |
-| `Characters` | `int` | Total character count including whitespace |
-| `SymbolDensity` | `float` | Ratio of symbol characters to non-whitespace characters (0.0--1.0) |
-| `MaxIndentDepth` | `int` | Deepest indentation level (4-space tabs) |
+| -------- | ------ | ------------- |
+| `Lines` | `int` | Nombre total de lignes |
+| `Characters` | `int` | Nombre total de caractères, espaces compris |
+| `SymbolDensity` | `float` | Ratio entre le nombre de caractères de symboles et le nombre de caractères non-espaces (0.0 à 1.0) |
+| `MaxIndentDepth` | `int` | Niveau d'indentation maximal (espaces de tabulation) |
 
-These metrics power adaptive difficulty: a snippet with high symbol density and deep nesting is harder to type than flat prose.
+Ces métriques permettent d'adapter la difficulté : un extrait avec une densité de symboles élevée et une indentation profonde est plus difficile à taper qu'un texte simple.
 
-## Prerequisites
+## Prérequis
 
-- [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0) or later
+- SDK .NET 8 ([https://dotnet.microsoft.com/download/dotnet/8.0](https://dotnet.microsoft.com/download/dotnet/8.0)) ou version ultérieure
 
-No other tools or dependencies are required.
+Aucun autre outil ou dépendance n'est requis.
 
-## Building from Source
+## Compilation à partir du code source
 
 ```bash
 git clone https://github.com/mcp-tool-shop-org/meta-content-system.git
@@ -142,7 +142,7 @@ dotnet build -c Release
 dotnet test -c Release
 ```
 
-## Project Structure
+## Structure du projet
 
 ```
 meta-content-system/
@@ -165,24 +165,24 @@ meta-content-system/
 └── LICENSE
 ```
 
-## Design Goals
+## Objectifs de conception
 
 | Goal | How |
-|------|-----|
-| **Platform-stable output** | LF normalization, deterministic sort, content-addressed IDs |
-| **Zero external dependencies** | Pure .NET 8 BCL -- no third-party NuGet packages |
-| **Interface-driven** | Every pipeline stage is behind an abstraction |
-| **Testable** | xUnit test suite with golden-parity checks |
-| **Extensible** | Implement `IContentSource` for custom ingestion, `IExtractor` for custom splitting |
+| ------ |-----|
+| **Platform-stable output** | Normalisation LF, tri déterministe, identifiants basés sur le contenu |
+| **Aucune dépendance externe** | BCL .NET 8 pure – aucun package NuGet tiers |
+| **Interface-driven** | Chaque étape du pipeline est abstraite |
+| **Testable** | Suite de tests xUnit avec vérifications de conformité |
+| **Extensible** | Implémentez `IContentSource` pour l'ingestion personnalisée, `IExtractor` pour le découpage personnalisé |
 
-## Consuming Apps
+## Applications consommatrices
 
-| App | Platform | Repository |
-|-----|----------|------------|
+| App | Plateforme | Dépôt |
+|-----| ---------- | ------------ |
 | Dev-Op-Typer | Windows (WinUI 3) | [mcp-tool-shop-org/dev-op-typer](https://github.com/mcp-tool-shop-org/dev-op-typer) |
-| linux-dev-typer | Cross-platform (.NET) | [mcp-tool-shop-org/linux-dev-typer](https://github.com/mcp-tool-shop-org/linux-dev-typer) |
+| linux-dev-typer | Multiplateforme (.NET) | [mcp-tool-shop-org/linux-dev-typer](https://github.com/mcp-tool-shop-org/linux-dev-typer) |
 
-## License
+## Licence
 
 [MIT](LICENSE)
 

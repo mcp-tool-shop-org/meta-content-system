@@ -14,33 +14,33 @@
   <a href="https://mcp-tool-shop-org.github.io/meta-content-system/"><img src="https://img.shields.io/badge/Landing_Page-live-blue?style=flat-square" alt="Landing Page"></a>
 </p>
 
-**Shared content system for typing-practice apps -- lessons, progression, and adaptive difficulty.**
+**用于打字练习应用的共享内容系统：课程、进度和自适应难度。**
 
-DevOpTyper.Content is the portable content pipeline behind [Dev-Op-Typer](https://github.com/mcp-tool-shop-org/dev-op-typer) (Windows) and [linux-dev-typer](https://github.com/mcp-tool-shop-org/linux-dev-typer) (cross-platform). It ingests source code files, normalizes them deterministically, computes difficulty metrics, and produces an indexed library that both apps consume identically regardless of platform.
+DevOpTyper.Content 是 [Dev-Op-Typer](https://github.com/mcp-tool-shop-org/dev-op-typer)（Windows）和 [linux-dev-typer](https://github.com/mcp-tool-shop-org/linux-dev-typer)（跨平台）背后的可移植内容流水线。它接收源代码文件，以确定性方式进行标准化，计算难度指标，并生成一个索引库，无论平台如何，两个应用都以相同的方式使用该库。
 
-## Why DevOpTyper.Content?
+## 为什么选择 DevOpTyper.Content？
 
-- **One pipeline, every platform** -- The same input files produce the same `library.index.json` on Windows, Linux, and macOS. No platform drift.
-- **Zero external dependencies** -- Pure .NET 8 library built entirely on the BCL. Nothing to install, nothing to conflict.
-- **Interface-driven architecture** -- Every pipeline stage (`IContentSource`, `IExtractor`, `IMetricCalculator`, `IContentLibrary`) is behind an abstraction for testability and extensibility.
-- **Deterministic language detection** -- Rule-based identification from file extensions and content heuristics. Supports 20+ languages out of the box.
-- **SHA-256 content deduplication** -- Content-addressed IDs prevent duplicates across imports. Import the same file twice, get one entry.
-- **Difficulty-aware metrics** -- Symbol density, indent depth, line count, and character distribution power adaptive difficulty in consuming apps.
-- **Smart extraction** -- Large files are split into right-sized practice blocks; small files are kept whole. Configurable thresholds.
+- **一个流水线，适用于所有平台**：相同的输入文件在 Windows、Linux 和 macOS 上都会生成相同的 `library.index.json` 文件。没有平台差异。
+- **零外部依赖**：纯 .NET 8 库，完全基于 BCL。无需安装任何内容，不会与其他内容冲突。
+- **基于接口的架构**：每个流水线阶段（`IContentSource`、`IExtractor`、`IMetricCalculator`、`IContentLibrary`）都通过抽象来实现，以便进行测试和扩展。
+- **确定性的语言检测**：基于规则的识别，通过文件扩展名和内容启发式方法进行判断。支持 20 多个语言。
+- **基于 SHA-256 的内容去重**：基于内容的 ID 可防止导入时出现重复项。即使导入相同的文件两次，也只会创建一个条目。
+- **基于难度的指标**：符号密度、缩进深度、行数和字符分布，为应用程序中的自适应难度提供支持。
+- **智能提取**：大文件会被拆分成适当大小的练习块；小文件保持完整。可以配置阈值。
 
-## NuGet Package
+## NuGet 包
 
-| Package | Description |
-|---------|-------------|
-| [`DevOpTyper.Content`](https://www.nuget.org/packages/DevOpTyper.Content) | Content ingestion, normalization, language detection, metrics calculation, and index generation. Zero external dependencies. |
+| 包 | 描述 |
+| --------- | ------------- |
+| [`DevOpTyper.Content`](https://www.nuget.org/packages/DevOpTyper.Content) | 内容摄取、标准化、语言检测、指标计算和索引生成。零外部依赖。 |
 
 ```bash
 dotnet add package DevOpTyper.Content
 ```
 
-## Quick Start
+## 快速开始
 
-### As a library
+### 作为库
 
 ```csharp
 using DevOpTyper.Content.Abstractions;
@@ -70,7 +70,7 @@ var store = new JsonLibraryIndexStore();
 store.Save("library.index.json", index);
 ```
 
-### Using the CLI
+### 使用 CLI
 
 ```bash
 dotnet run --project src/DevOpTyper.Content.Cli -- build --source ./my-code --out library.index.json
@@ -78,7 +78,7 @@ dotnet run --project src/DevOpTyper.Content.Cli -- build --source ./my-code --ou
 dotnet run --project src/DevOpTyper.Content.Cli -- paste --lang csharp --title "Hello World" --text "Console.WriteLine(\"Hello\");"
 ```
 
-## Architecture
+## 架构
 
 ```
 IContentSource                    Enumerates raw files
@@ -109,30 +109,30 @@ IContentLibrary                   Query by language, source, line count,
                                   symbol density range
 ```
 
-### Supported Languages
+### 支持的语言
 
-The language detector covers 20+ languages via extension mapping and content heuristics:
+语言检测器通过扩展映射和内容启发式方法支持 20 多个语言：
 
-Python, C#, Java, JavaScript, TypeScript, SQL, Bash, Rust, Go, Kotlin, C, C++, JSON, YAML, Markdown -- and more via extension map. Unknown files fall back to `text`.
+Python、C#、Java、JavaScript、TypeScript、SQL、Bash、Rust、Go、Kotlin、C、C++、JSON、YAML、Markdown，以及更多语言通过扩展映射支持。未知文件默认为 `text`。
 
-### Metrics Computed
+### 计算的指标
 
-| Metric | Type | Description |
-|--------|------|-------------|
-| `Lines` | `int` | Total line count |
-| `Characters` | `int` | Total character count including whitespace |
-| `SymbolDensity` | `float` | Ratio of symbol characters to non-whitespace characters (0.0--1.0) |
-| `MaxIndentDepth` | `int` | Deepest indentation level (4-space tabs) |
+| 指标 | Type | 描述 |
+| -------- | ------ | ------------- |
+| `Lines` | `int` | 总行数 |
+| `Characters` | `int` | 包括空格的总字符数 |
+| `SymbolDensity` | `float` | 符号字符与非空格字符的比例（0.0--1.0） |
+| `MaxIndentDepth` | `int` | 最深的缩进级别（4 个空格制表符） |
 
-These metrics power adaptive difficulty: a snippet with high symbol density and deep nesting is harder to type than flat prose.
+这些指标用于自适应难度：与纯文本相比，具有高符号密度和深层嵌套的代码片段更难输入。
 
-## Prerequisites
+## 先决条件
 
-- [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0) or later
+- [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0) 或更高版本
 
-No other tools or dependencies are required.
+不需要其他工具或依赖项。
 
-## Building from Source
+## 从源代码构建
 
 ```bash
 git clone https://github.com/mcp-tool-shop-org/meta-content-system.git
@@ -142,7 +142,7 @@ dotnet build -c Release
 dotnet test -c Release
 ```
 
-## Project Structure
+## 项目结构
 
 ```
 meta-content-system/
@@ -165,24 +165,24 @@ meta-content-system/
 └── LICENSE
 ```
 
-## Design Goals
+## 设计目标
 
 | Goal | How |
-|------|-----|
-| **Platform-stable output** | LF normalization, deterministic sort, content-addressed IDs |
-| **Zero external dependencies** | Pure .NET 8 BCL -- no third-party NuGet packages |
-| **Interface-driven** | Every pipeline stage is behind an abstraction |
-| **Testable** | xUnit test suite with golden-parity checks |
-| **Extensible** | Implement `IContentSource` for custom ingestion, `IExtractor` for custom splitting |
+| ------ |-----|
+| **Platform-stable output** | LF 归一化、确定性排序、基于内容的 ID |
+| **零外部依赖** | 纯 .NET 8 BCL，不使用任何第三方 NuGet 包 |
+| **Interface-driven** | 每个流水线阶段都通过抽象来实现 |
+| **Testable** | 带有黄金匹配检查的 xUnit 测试套件 |
+| **Extensible** | 实现 `IContentSource` 以进行自定义摄取，实现 `IExtractor` 以进行自定义拆分 |
 
-## Consuming Apps
+## 使用应用程序
 
-| App | Platform | Repository |
-|-----|----------|------------|
+| App | 平台 | 仓库 |
+|-----| ---------- | ------------ |
 | Dev-Op-Typer | Windows (WinUI 3) | [mcp-tool-shop-org/dev-op-typer](https://github.com/mcp-tool-shop-org/dev-op-typer) |
-| linux-dev-typer | Cross-platform (.NET) | [mcp-tool-shop-org/linux-dev-typer](https://github.com/mcp-tool-shop-org/linux-dev-typer) |
+| linux-dev-typer | 跨平台（.NET） | [mcp-tool-shop-org/linux-dev-typer](https://github.com/mcp-tool-shop-org/linux-dev-typer) |
 
-## License
+## 许可证
 
 [MIT](LICENSE)
 

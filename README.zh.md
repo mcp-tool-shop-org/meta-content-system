@@ -16,9 +16,9 @@
 
 **用于打字练习应用的共享内容系统：课程、进度和自适应难度。**
 
-DevOpTyper.Content 是 [Dev-Op-Typer](https://github.com/mcp-tool-shop-org/dev-op-typer)（Windows）和 [linux-dev-typer](https://github.com/mcp-tool-shop-org/linux-dev-typer)（跨平台）背后的可移植内容流水线。它接收源代码文件，以确定性方式进行标准化，计算难度指标，并生成一个索引库，无论平台如何，两个应用都以相同的方式使用该库。
+Meta Content System 是 [Dev-Op-Typer](https://github.com/mcp-tool-shop-org/dev-op-typer)（Windows）和 [linux-dev-typer](https://github.com/mcp-tool-shop-org/linux-dev-typer)（跨平台）背后的可移植内容流水线。它接收源代码文件，对其进行确定性的标准化处理，计算难度指标，并生成一个索引库，这两个应用程序无论在哪个平台上运行，都以相同的方式使用该库。
 
-## 为什么选择 DevOpTyper.Content？
+## 为什么选择 Meta Content System？
 
 - **一个流水线，适用于所有平台**：相同的输入文件在 Windows、Linux 和 macOS 上都会生成相同的 `library.index.json` 文件。没有平台差异。
 - **零外部依赖**：纯 .NET 8 库，完全基于 BCL。无需安装任何内容，不会与其他内容冲突。

@@ -16,9 +16,9 @@
 
 **Sistema de contenido compartido para aplicaciones de práctica de mecanografía: lecciones, progreso y dificultad adaptable.**
 
-DevOpTyper.Content es la canalización de contenido portátil que utilizan [Dev-Op-Typer](https://github.com/mcp-tool-shop-org/dev-op-typer) (Windows) y [linux-dev-typer](https://github.com/mcp-tool-shop-org/linux-dev-typer) (plataforma cruzada).  Esta canalización procesa archivos de código fuente, los normaliza de forma determinista, calcula métricas de dificultad y genera una biblioteca indexada que ambas aplicaciones utilizan de la misma manera, independientemente de la plataforma.
+Meta Content System es el sistema de procesamiento de contenido que se utiliza en [Dev-Op-Typer](https://github.com/mcp-tool-shop-org/dev-op-typer) (Windows) y [linux-dev-typer](https://github.com/mcp-tool-shop-org/linux-dev-typer) (plataforma cruzada). Este sistema recibe archivos de código fuente, los normaliza de manera determinista, calcula métricas de dificultad y genera una biblioteca indexada que ambas aplicaciones utilizan de la misma manera, independientemente de la plataforma.
 
-## ¿Por qué DevOpTyper.Content?
+## ¿Por qué Meta Content System?
 
 - **Una canalización, para todas las plataformas:** Los mismos archivos de entrada producen el mismo `library.index.json` en Windows, Linux y macOS. No hay diferencias de comportamiento entre plataformas.
 - **Sin dependencias externas:** Biblioteca .NET 8 pura, construida completamente sobre la BCL (Base Class Library). No hay nada que instalar, ni conflictos posibles.

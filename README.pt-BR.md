@@ -16,9 +16,9 @@
 
 **Sistema de conteúdo compartilhado para aplicativos de prática de digitação -- lições, progressão e dificuldade adaptativa.**
 
-DevOpTyper.Content é a pipeline de conteúdo portátil que está por trás do [Dev-Op-Typer](https://github.com/mcp-tool-shop-org/dev-op-typer) (Windows) e do [linux-dev-typer](https://github.com/mcp-tool-shop-org/linux-dev-typer) (plataforma cruzada). Ele ingere arquivos de código-fonte, os normaliza de forma determinística, calcula métricas de dificuldade e gera uma biblioteca indexada que ambos os aplicativos consomem de forma idêntica, independentemente da plataforma.
+O Meta Content System é a infraestrutura de processamento de conteúdo que está por trás do [Dev-Op-Typer](https://github.com/mcp-tool-shop-org/dev-op-typer) (Windows) e do [linux-dev-typer](https://github.com/mcp-tool-shop-org/linux-dev-typer) (plataforma cruzada). Ele recebe arquivos de código-fonte, os normaliza de forma determinística, calcula métricas de dificuldade e gera uma biblioteca indexada que ambos os aplicativos utilizam da mesma forma, independentemente da plataforma.
 
-## Por que DevOpTyper.Content?
+## Por que usar o Meta Content System?
 
 - **Uma pipeline para todas as plataformas** -- Os mesmos arquivos de entrada produzem o mesmo `library.index.json` no Windows, Linux e macOS. Sem desvios de plataforma.
 - **Zero dependências externas** -- Biblioteca .NET 8 pura, construída inteiramente na BCL. Nada para instalar, nada para conflitar.

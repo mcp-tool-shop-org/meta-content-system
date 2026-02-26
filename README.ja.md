@@ -16,9 +16,9 @@
 
 **タイピング練習アプリ向けの共有コンテンツシステム -- レッスン、進捗、および適応的な難易度。**
 
-DevOpTyper.Contentは、[Dev-Op-Typer](https://github.com/mcp-tool-shop-org/dev-op-typer)（Windows）および[linux-dev-typer](https://github.com/mcp-tool-shop-org/linux-dev-typer)（クロスプラットフォーム）の背後にある、ポータブルなコンテンツパイプラインです。ソースコードファイルを読み込み、決定的に正規化し、難易度メトリックを計算し、インデックス付きのライブラリを生成します。このライブラリは、プラットフォームに関係なく、両方のアプリで同じように使用されます。
+Meta Content Systemは、[Dev-Op-Typer](https://github.com/mcp-tool-shop-org/dev-op-typer)（Windows）および[linux-dev-typer](https://github.com/mcp-tool-shop-org/linux-dev-typer)（クロスプラットフォーム）で使用されている、可搬性の高いコンテンツ処理パイプラインです。このシステムは、ソースコードファイルを読み込み、それらを決定的に正規化し、難易度指標を計算し、インデックス化されたライブラリを生成します。このライブラリは、どちらのアプリケーションもプラットフォームに関わらず同じように利用します。
 
-## DevOpTyper.Contentを選ぶ理由
+## なぜMeta Content Systemを使うのか？
 
 - **単一のパイプライン、すべてのプラットフォーム** -- 同じ入力ファイルから、Windows、Linux、macOSで同じ`library.index.json`が生成されます。プラットフォーム間の差異はありません。
 - **外部依存関係ゼロ** -- 完全に.NET 8ライブラリで構築されており、BCL（.NET Base Class Library）のみを使用します。インストールする必要がなく、競合もありません。

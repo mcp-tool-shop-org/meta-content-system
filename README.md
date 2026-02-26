@@ -4,8 +4,6 @@
 
 <p align="center"><img src="assets/logo.png" alt="Meta Content System" width="400"></p>
 
-<h1 align="center">Meta Content System</h1>
-
 <p align="center">
   <a href="https://github.com/mcp-tool-shop-org/meta-content-system/actions/workflows/build.yml"><img src="https://img.shields.io/github/actions/workflow/status/mcp-tool-shop-org/meta-content-system/build.yml?branch=main&style=flat-square&label=CI" alt="CI"></a>
   <img src="https://img.shields.io/badge/.NET-8-purple?style=flat-square&logo=dotnet" alt=".NET 8">

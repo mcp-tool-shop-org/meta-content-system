@@ -14,7 +14,7 @@ export const config: SiteConfig = {
     headlineAccent: 'Every platform.',
     description: 'Portable content ingestion, normalization, and indexing. Deterministic language detection, difficulty metrics, and library generation — zero external dependencies.',
     primaryCta: { href: '#usage', label: 'Get started' },
-    secondaryCta: { href: '#features', label: 'Learn more' },
+    secondaryCta: { href: 'handbook/', label: 'Read the Handbook' },
     previews: [
       { label: 'Install', code: 'dotnet add package DevOpTyper.Content' },
       { label: 'Build', code: 'dotnet run -- build --source ./code --out library.index.json' },

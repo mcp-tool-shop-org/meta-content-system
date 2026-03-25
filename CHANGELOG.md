@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/),
 and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.0.4] - 2026-03-25
+
+### Added
+- `--version` / `-V` flag on CLI
+- Help output now includes flags section
+
 ## [1.0.3] - 2026-02-27
 
 ### Changed

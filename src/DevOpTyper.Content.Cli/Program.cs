@@ -7,6 +7,17 @@ static void Help()
     Console.WriteLine("Commands:");
     Console.WriteLine("  paste --out <index.json> --lang <language> --title <title> --text <code>");
     Console.WriteLine("  build --out <index.json> --source <folder>");
+    Console.WriteLine("Flags:");
+    Console.WriteLine("  --version, -V   Show version and exit");
+    Console.WriteLine("  --help, -h      Show this help");
+}
+
+if (args.Contains("--version") || args.Contains("-V"))
+{
+    var asm = typeof(DevOpTyper.Content.Services.LibraryIndexBuilder).Assembly;
+    var ver = asm.GetName().Version?.ToString(3) ?? "unknown";
+    Console.WriteLine($"DevOpTyper.Content {ver}");
+    return 0;
 }
 
 if (args.Length == 0 || args.Contains("--help") || args.Contains("-h"))

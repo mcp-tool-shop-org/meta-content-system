@@ -9,9 +9,10 @@ Welcome to the Meta Content System handbook. This is the complete guide to the c
 
 ## What's inside
 
+- **[Beginners](/meta-content-system/handbook/beginners/)** — New here? Start with the concepts and a hands-on walkthrough
 - **[Getting Started](/meta-content-system/handbook/getting-started/)** — Install the NuGet package and build your first index
 - **[Architecture](/meta-content-system/handbook/architecture/)** — Pipeline stages, interfaces, and data flow
-- **[Reference](/meta-content-system/handbook/reference/)** — CLI commands, metrics, and supported languages
+- **[Reference](/meta-content-system/handbook/reference/)** — CLI commands, query API, metrics, and supported languages
 
 ## What is Meta Content System?
 

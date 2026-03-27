@@ -64,4 +64,59 @@ Each code item gets a SHA-256 content-addressed ID computed from `language + nor
 
 ## Smart extraction
 
-Large files are automatically split into right-sized practice blocks. Small files are kept whole. Thresholds are configurable via the extractor.
+`DefaultExtractor` splits large files into right-sized practice blocks using blank-line boundaries. Small files are kept whole. The thresholds are configurable via init-only properties:
+
+| Property | Default | Description |
+|----------|---------|-------------|
+| `MaxCharsWholeFile` | 4000 | Files at or below this size are returned as a single unit |
+| `MinBlockChars` | 200 | Blocks shorter than this are skipped |
+| `MaxBlockChars` | 2000 | Blocks longer than this are skipped |
+
+When a large file produces no qualifying blocks (all are too short or too long), the extractor falls back to returning the entire file as one unit.
+
+## Models
+
+### RawContent
+
+The record that `IContentSource` yields for each file:
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `Path` | `string?` | File path (null for pasted text) |
+| `LanguageHint` | `string?` | Optional language override |
+| `Title` | `string` | Display title |
+| `Text` | `string` | Raw source text |
+| `Source` | `string` | Origin category: `builtin`, `corpus`, or `user` |
+| `Origin` | `string?` | Pack name or root folder path |
+
+### CodeItem
+
+The record stored in the library index after processing:
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `Id` | `string` | Content-addressed hex ID (32 chars) |
+| `Language` | `string` | Detected language |
+| `Source` | `string` | Origin category |
+| `Title` | `string` | Display title |
+| `Code` | `string` | Normalized source text |
+| `Metrics` | `CodeMetrics` | Computed difficulty metrics |
+| `CreatedUtc` | `DateTimeOffset` | Timestamp |
+| `Origin` | `string?` | Pack name or root path |
+| `Concepts` | `string[]?` | Optional concept tags |
+
+### LibraryIndex
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `Version` | `int` | Schema version (currently `1`) |
+| `GeneratedUtc` | `DateTimeOffset` | When the index was built |
+| `Items` | `List<CodeItem>` | All indexed code items |
+| `Stats` | `LibraryStats?` | Summary statistics (populated on save) |
+
+### LibraryStats
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `TotalItems` | `int` | Number of items in the index |
+| `Languages` | `List<string>` | Distinct languages found |
